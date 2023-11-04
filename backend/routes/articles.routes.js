@@ -14,6 +14,8 @@ router.post(
   articlesController.createArticle,
 );
 
+router.get('/', articlesController.findArticles);
+
 router.get(
   '/:id',
   applyValidation(findArticleByIdSchema),

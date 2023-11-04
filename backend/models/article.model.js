@@ -17,6 +17,7 @@ const articleSchema = new mongoose.Schema(
     description: String,
     content: String,
     imagePath: String,
+    __v: { type: Number, select: false },
   },
   { timestamps: true },
 );

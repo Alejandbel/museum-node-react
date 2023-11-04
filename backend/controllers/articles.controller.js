@@ -1,4 +1,3 @@
-import { Article } from '../models/article.model.js';
 import { articlesService } from '../services/articles.service.js';
 
 class ArticlesController {
@@ -29,12 +28,16 @@ class ArticlesController {
     }
   };
 
-  /**
-   * @returns {Article[]}
-   */
-  find() {
-    return Article.find().lean();
-  }
+  /** @type ControllerMethod */
+  findArticles = async (req, res, next) => {
+    try {
+      const articles = await articlesService.find();
+
+      res.status(200).json({ items: articles });
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
 export const articlesController = new ArticlesController();
