@@ -4,9 +4,13 @@ export const USER_ROLE = {
 };
 
 /**
+ * @typedef {'user' | 'admin'} UserRole
+ */
+
+/**
  * @typedef {Object} User
  * @property {ObjectId} _id
- * @property {'user' | 'admin'} role
+ * @property {UserRole} role
  * @property {string} email
  * @property {string} firstname
  * @property {string} lastname

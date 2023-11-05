@@ -18,6 +18,14 @@ class JwtService {
       },
     );
   }
+
+  /**
+   * @param {string} accessToken
+   * @returns {{_id: string, role: UserRole}}
+   */
+  validateAccessToken(accessToken) {
+    return jwt.verify(accessToken, JWT.SECRET);
+  }
 }
 
 export const jwtService = new JwtService();
