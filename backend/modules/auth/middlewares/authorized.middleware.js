@@ -1,8 +1,7 @@
 import { ACCESS_TOKEN_COOKIE } from '../constants/cookies.constants.js';
-import { UnauthorizedError } from '../../../errors/unauthorized.error.js';
+import { ForbiddenError, UnauthorizedError } from '../../core/index.js';
 import { jwtService } from '../services/jwt.service.js';
 import { JsonWebTokenError } from 'jsonwebtoken';
-import { ForbiddenError } from '../../../errors/forbidden.error.js';
 
 /**
  * @param {UserRole[]} [allowedRoles]

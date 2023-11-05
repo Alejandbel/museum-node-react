@@ -1,5 +1,5 @@
 import express from 'express';
-import { applyValidation } from '../../../middlewares/validation.middleware.js';
+import { applyValidation } from '../../core/index.js';
 import { signInWithGoogleSchema } from '../validation-schemas/google-auth.validation-schemas.js';
 import { googleAuthController } from '../controllers/google-auth.controller.js';
 

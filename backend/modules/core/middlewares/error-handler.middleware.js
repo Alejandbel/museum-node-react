@@ -1,14 +1,14 @@
-import { AppError } from '../errors/app.error.js';
+import { AppError } from '../errors/index.js';
 import Joi from 'joi';
 
 /**
  * @param {unknown} err
  * @param {unknown} req
  * @param {import('express').Response}res
- * @param {unknown} next
+ * @param {unknown} _
  */
 // eslint-disable-next-line no-unused-vars
-export const errorHandlerMiddleware = (err, req, res, next) => {
+export const errorHandlerMiddleware = (err, req, res, _) => {
   if (err instanceof AppError) {
     res.status(err.statusCode).json({
       message: err.message,

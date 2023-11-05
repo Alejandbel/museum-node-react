@@ -1,6 +1,6 @@
 import express from 'express';
 import { articlesController } from '../controllers/articles.controller.js';
-import { applyValidation } from '../../../middlewares/validation.middleware.js';
+import { applyValidation } from '../../core/index.js';
 import { creteArticleSchema, findArticleByIdSchema } from '../validation-schemas/articles.validation-schemas.js';
 
 const router = express.Router();

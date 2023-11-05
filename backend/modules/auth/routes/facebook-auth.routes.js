@@ -1,6 +1,6 @@
 import express from 'express';
 import { facebookAuthController } from '../controllers/facebook-auth.controller.js';
-import { applyValidation } from '../../../middlewares/validation.middleware.js';
+import { applyValidation } from '../../core/index.js';
 import { signInWithFacebookSchema } from '../validation-schemas/facebook-auth.validation-schemas.js';
 
 const router = express.Router();

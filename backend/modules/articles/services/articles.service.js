@@ -1,4 +1,4 @@
-import { EntityNotFoundError } from '../../../errors/entity-not-found.error.js';
+import { EntityNotFoundError } from '../../core/index.js';
 import { articlesRepository } from '../repositories/articles.repository.js';
 
 class ArticlesService {

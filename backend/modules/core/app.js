@@ -3,7 +3,7 @@ import cookieParser from 'cookie-parser';
 
 import { mountRouter } from './routes/index.js';
 import { useLogger } from './utils/logger.js';
-import { errorHandlerMiddleware } from './middlewares/error-handler.middleware.js';
+import { errorHandlerMiddleware } from './middlewares/index.js';
 import cors from 'cors';
 
 const app = express();

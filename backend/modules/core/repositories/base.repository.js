@@ -23,6 +23,13 @@ export class BaseRepository {
   }
 
   /**
+   * @param id
+   */
+  async deleteById(id) {
+    await this.model.findByIdAndDelete(id);
+  }
+
+  /**
    * @param {FilterQuery<*>} filter
    */
   async findOne(filter) {

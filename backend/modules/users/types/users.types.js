@@ -9,7 +9,7 @@ export const USER_ROLE = {
 
 /**
  * @typedef {Object} User
- * @property {ObjectId} _id
+ * @property {string} _id
  * @property {UserRole} role
  * @property {string} email
  * @property {string} firstname

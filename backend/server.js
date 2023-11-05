@@ -1,15 +1,9 @@
-import mongoose from 'mongoose';
-import { MONGOOSE_CONNECTION, PORT } from './config.js';
-import { app } from './app.js';
+import { PORT } from './modules/core/config.js';
+import { app } from './modules/core/app.js';
+import { initDatabaseConnection } from './modules/core/db/index.js';
 
 async function main() {
-  try {
-    await mongoose.connect(MONGOOSE_CONNECTION);
-    console.log('Mongodb connected');
-  } catch (err) {
-    console.error('Error connecting to mongodb');
-  }
-
+  await initDatabaseConnection();
   app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
   });

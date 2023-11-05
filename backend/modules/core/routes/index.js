@@ -1,12 +1,14 @@
 import express from 'express';
 
-import { mountArticlesRouter } from '../modules/articles/index.js';
-import { mountAuthRoutes } from '../modules/auth/index.js';
+import { mountArticlesRouter } from '../../articles/index.js';
+import { mountAuthRoutes } from '../../auth/index.js';
+import { mountExhibitRouter } from '../../museum/index.js';
 
 const router = express.Router();
 
 mountArticlesRouter(router);
 mountAuthRoutes(router);
+mountExhibitRouter(router);
 
 /**
  * @param {import('express').IRouter}routing
