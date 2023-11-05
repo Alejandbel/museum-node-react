@@ -2,11 +2,7 @@
  * @param {{body: ObjectSchema<*> | undefined, params: ObjectSchema<*> | undefined, query: ObjectSchema<*> | undefined}} validationSchema
  * @returns {Middleware}
  */
-export const applyValidation = ({
-  body: bodySchema,
-  params: paramsSchema,
-  query: querySchema,
-}) => {
+export const applyValidation = ({ body: bodySchema, params: paramsSchema, query: querySchema }) => {
   return async (req, res, next) => {
     try {
       if (paramsSchema) {
@@ -20,6 +16,7 @@ export const applyValidation = ({
         });
       }
       if (bodySchema) {
+        console.log(bodySchema, req.body);
         req.body = await bodySchema.validateAsync(req.body, {
           stripUnknown: true,
         });

@@ -4,9 +4,11 @@ import cookieParser from 'cookie-parser';
 import { mountRouter } from './routes/index.js';
 import { useLogger } from './utils/logger.js';
 import { errorHandlerMiddleware } from './middlewares/error-handler.middleware.js';
+import cors from 'cors';
 
 const app = express();
 
+app.use(cors());
 useLogger(app);
 app.use(express.json());
 app.use(cookieParser());

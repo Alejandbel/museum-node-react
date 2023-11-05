@@ -1,5 +1,5 @@
-import { Article } from '../models/article.model.js';
-import { EntityNotFoundError } from '../errors/entity-not-found.error.js';
+import { EntityNotFoundError } from '../../../errors/entity-not-found.error.js';
+import { articlesRepository } from '../repositories/articles.repository.js';
 
 class ArticlesService {
   /**
@@ -7,8 +7,7 @@ class ArticlesService {
    * @returns {Promise<Article>}
    */
   async create(article) {
-    const createdArticle = await Article.create(article);
-    return createdArticle.toObject();
+    return articlesRepository.create(article);
   }
 
   /**
@@ -16,7 +15,7 @@ class ArticlesService {
    * @returns {Promise<Article>}
    */
   async findById(id) {
-    const article = await Article.findById(id).lean();
+    const article = await articlesRepository.findById(id);
 
     if (!article) {
       throw new EntityNotFoundError('Article');
@@ -28,8 +27,8 @@ class ArticlesService {
   /**
    * @returns {Promise<Article[]>}
    */
-  find() {
-    return Article.find().lean();
+  async find() {
+    return articlesRepository.find();
   }
 }
 

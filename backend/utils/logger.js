@@ -1,7 +1,7 @@
 import morgan from 'morgan';
 
 /**
- * @param {Express}app
+ * @param {Express} app
  */
 export function useLogger(app) {
   app.use(
@@ -10,9 +10,5 @@ export function useLogger(app) {
     }),
   );
 
-  app.use(
-    morgan(
-      '[:date[iso]] Completed :status :res[content-length] in :response-time ms',
-    ),
-  );
+  app.use(morgan('[:date[iso]] Completed :status :res[content-length] in :response-time ms'));
 }
