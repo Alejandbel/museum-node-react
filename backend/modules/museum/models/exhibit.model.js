@@ -6,10 +6,10 @@ const exhibitSchema = new mongoose.Schema(
     typesOfArt: { type: [String], required: true },
     receiptDate: { type: Date, required: true },
     imagePath: String,
-    // TODO: employee: { type: ObjectId },
+    employeeId: { type: mongoose.Types.ObjectId, ref: 'user' },
     __v: { type: Number, select: false },
   },
   { timestamps: true },
 );
 
-export const ExhibitModel = mongoose.model('article', exhibitSchema);
+export const ExhibitModel = mongoose.model('exhibit', exhibitSchema);

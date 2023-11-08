@@ -3,11 +3,12 @@ import { feedbacksRepository } from '../repositories/feedbacks.repository.js';
 
 class FeedbacksService {
   /**
+   * @param {string} userId
    * @param {Omit<Feedback, '_id' | 'createdAt' | 'updatedAt'>} feedback
    * @returns {Promise<Feedback>}
    */
-  async create(feedback) {
-    return feedbacksRepository.create(feedback);
+  async create(userId, feedback) {
+    return feedbacksRepository.create({ ...feedback, authorId: userId });
   }
 
   /**

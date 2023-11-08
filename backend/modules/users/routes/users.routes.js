@@ -1,9 +1,10 @@
 import express from 'express';
 import { usersController } from '../controllers/users.controller.js';
+import { authorized } from '../../auth/middlewares/authorized.middleware.js';
 
 const router = express.Router();
 
-router.post('/me', usersController.getSelf);
+router.get('/me', authorized(), usersController.getSelf);
 
 /**
  * @param {import('express').IRouter} routing

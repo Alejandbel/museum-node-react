@@ -8,7 +8,6 @@ class ArticlesController {
 
       const createdArticle = await articlesService.create(article);
 
-      console.log(createdArticle);
       res.status(201).json(createdArticle);
     } catch (err) {
       next(err);

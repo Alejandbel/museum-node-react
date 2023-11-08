@@ -4,11 +4,13 @@ import { mountArticlesRouter } from '../../articles/index.js';
 import { mountAuthRoutes } from '../../auth/index.js';
 import { mountExhibitRouter } from '../../museum/index.js';
 import { mountFeedbackRouter } from '../../feedbacks/index.js';
+import { mountUsersRouter } from '../../users/index.js';
 
 const router = express.Router();
 
 mountArticlesRouter(router);
 mountAuthRoutes(router);
+mountUsersRouter(router);
 mountExhibitRouter(router);
 mountFeedbackRouter(router);
 

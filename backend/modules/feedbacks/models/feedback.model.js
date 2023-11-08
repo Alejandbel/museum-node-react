@@ -5,10 +5,10 @@ const feedbackSchema = new mongoose.Schema(
     title: { type: String, required: true },
     rating: { type: Number, required: true },
     content: { type: Date },
-    authorId: String, //TODO: relation
+    authorId: { type: mongoose.Types.ObjectId, ref: 'user' },
     __v: { type: Number, select: false },
   },
   { timestamps: true },
 );
 
-export const FeedbackModel = mongoose.model('article', feedbackSchema);
+export const FeedbackModel = mongoose.model('feedback', feedbackSchema);

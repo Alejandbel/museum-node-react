@@ -13,7 +13,6 @@ class GoogleAuthService {
    */
   async signIn(googleOauthToken) {
     const user = await this.extractUserFromToken(googleOauthToken);
-    console.log(user);
     return authService.getUsersToken(user.email, user);
   }
 

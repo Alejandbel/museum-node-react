@@ -6,16 +6,23 @@ import {
   deleteFeedbackByIdSchema,
   findFeedbackByIdSchema,
 } from '../validation-schemas/feebacks.validation-schemas.js';
+import { authorized } from '../../auth/middlewares/authorized.middleware.js';
+import { USER_ROLE } from '../../users/types/users.types.js';
 
 const router = express.Router();
 
-router.post('/', applyValidation(createFeedbackSchema), feedbacksController.createFeedback);
+router.post('/', authorized(), applyValidation(createFeedbackSchema), feedbacksController.createFeedback);
 
 router.get('/', feedbacksController.findFeedbacks);
 
 router.get('/:id', applyValidation(findFeedbackByIdSchema), feedbacksController.findFeedbackById);
 
-router.delete('/:id', applyValidation(deleteFeedbackByIdSchema), feedbacksController.deleteFeedbackById);
+router.delete(
+  '/:id',
+  authorized([USER_ROLE.ADMIN]),
+  applyValidation(deleteFeedbackByIdSchema),
+  feedbacksController.deleteFeedbackById,
+);
 
 /**
  * @param {import('express').IRouter}routing

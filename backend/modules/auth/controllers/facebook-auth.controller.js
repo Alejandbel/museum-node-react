@@ -10,6 +10,7 @@ class FacebookAuthController {
       const accessToken = await facebookAuthService.signIn(facebookAccessToken);
 
       res.cookie(ACCESS_TOKEN_COOKIE, accessToken);
+      console.log(res.cookies);
       return res.status(204).send();
     } catch (err) {
       next(err);

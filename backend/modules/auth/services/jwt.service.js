@@ -9,7 +9,7 @@ class JwtService {
   generateAccessToken(user) {
     return jwt.sign(
       {
-        _id: user._id,
+        id: user._id,
         role: user.role,
       },
       JWT.SECRET,

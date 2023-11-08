@@ -16,7 +16,6 @@ export const applyValidation = ({ body: bodySchema, params: paramsSchema, query:
         });
       }
       if (bodySchema) {
-        console.log(bodySchema, req.body);
         req.body = await bodySchema.validateAsync(req.body, {
           stripUnknown: true,
         });

@@ -5,8 +5,9 @@ class FeedbacksController {
   createFeedback = async (req, res, next) => {
     try {
       const feedback = req.body;
+      const userId = req.user.id;
 
-      const createdFeedback = await feedbacksService.create(feedback);
+      const createdFeedback = await feedbacksService.create(userId, feedback);
 
       res.status(201).json(createdFeedback);
     } catch (err) {
