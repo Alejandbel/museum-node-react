@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 /**
  * @param {Article} article
@@ -10,7 +11,7 @@ function ArticleCard({ article }) {
       <div>
         <h3>{article.title}</h3>
         <p>
-          <a href="/1">{article.description}</a>
+          <Link to={`/articles/${article._id}`}>{article.description}</Link>
         </p>
       </div>
       {article.imagePath && <img src={article.imagePath} alt="article" />}

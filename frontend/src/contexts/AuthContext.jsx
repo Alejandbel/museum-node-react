@@ -1,8 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID } from '../config';
+import { usersService } from '../services/usersService';
+import { authService } from '../services/authService';
 
-const AuthContext = React.createContext(undefined);
+export const AuthContext = React.createContext(undefined);
 
 function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
@@ -10,40 +12,58 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const effect = async () => {
-      const user = null;
+      const user = await usersService.getCurrentUser().catch(() => null);
       setCurrentUser(user);
       setLoading(false);
     };
+
     effect().catch(console.error);
   }, []);
 
-  async function signup() {
+  // async function signup() {
+  //   setLoading(true);
+  //   const user = null; // TODO: signup
+  //   setCurrentUser(user);
+  //   setLoading(false);
+  // }
+
+  async function signInWithFacebook(token) {
     setLoading(true);
-    const user = null; // TODO: signup
+    await authService.signInWithFacebook(token);
+    const user = await usersService.getCurrentUser().catch(() => null);
     setCurrentUser(user);
     setLoading(false);
   }
 
-  async function login() {
+  async function signInWithGoogle(token) {
     setLoading(true);
-    const user = null; // TODO: login
+    await authService.signInWithGoogle(token);
+    const user = await usersService.getCurrentUser().catch(() => null);
     setCurrentUser(user);
     setLoading(false);
   }
 
-  function logout() {
+  // async function login() {
+  //   setLoading(true);
+  //   const user = null; // TODO: login
+  //   setCurrentUser(user);
+  //   setLoading(false);
+  // }
+
+  async function logout() {
     setLoading(true);
-    // TODO: logout
+    await authService.logout();
     setCurrentUser(null);
     setLoading(false);
   }
 
   const value = useMemo(() => ({
     currentUser,
-    login,
-    signup,
+    signInWithFacebook,
+    signInWithGoogle,
     logout,
-  }), []);
+  }), [currentUser]);
+
   return (
     <GoogleOAuthProvider clientId={GOOGLE_CLIENT_ID}>
       <AuthContext.Provider value={value}>

@@ -1,11 +1,10 @@
 export default function authHeader() {
   const user = {
-    accessToken: '' // TODO
+    accessToken: '', // TODO
   };
 
   if (user) {
-    return { Authorization: 'Bearer ' + user.accessToken };
-  } else {
-    return {};
+    return { Authorization: `Bearer ${user.accessToken}` };
   }
+  return {};
 }

@@ -32,5 +32,7 @@ module.exports = {
     'react/prop-types': 'off',
     'no-underscore-dangle': 'off',
     'no-void': 'off',
+    'import/prefer-default-export': 'off',
+    'class-methods-use-this': 'off',
   },
 };

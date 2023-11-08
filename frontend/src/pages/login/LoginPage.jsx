@@ -2,30 +2,22 @@ import React from 'react';
 import { GoogleLogin } from '@react-oauth/google';
 import FacebookLogin from '@greatsumini/react-facebook-login';
 import { FACEBOOK_APP_ID } from '../../config';
+import { useAuth } from '../../hooks/useAuth';
 
 function LoginPage() {
+  const { signInWithGoogle, signInWithFacebook } = useAuth();
+
   return (
     <>
       <FacebookLogin
         appId={FACEBOOK_APP_ID}
-        loginOptions={{}}
         onSuccess={(response) => {
-          console.log('Login Success!', response);
-        }}
-        onFail={(error) => {
-          console.log('Login Failed!', error);
-        }}
-        onProfileSuccess={(response) => {
-          console.log('Get Profile Success!', response);
+          signInWithFacebook(response.accessToken);
         }}
       />
-      ,
       <GoogleLogin
         onSuccess={(credentialResponse) => {
-          console.log(credentialResponse);
-        }}
-        onError={() => {
-          console.log('Login Failed');
+          signInWithGoogle(credentialResponse.credential);
         }}
       />
     </>
