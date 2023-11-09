@@ -4,7 +4,7 @@
  * @property {string} title
  * @property {number} rating
  * @property {string} content
- * @property {string} authorId
+ * @property {string} author
  * @property {Date} createdAt
  * @property {Date} updatedAt
  */

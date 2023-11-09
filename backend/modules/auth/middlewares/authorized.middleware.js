@@ -10,8 +10,6 @@ import jwt from 'jsonwebtoken';
 export const authorized = (allowedRoles) => (req, res, next) => {
   const accessToken = req.cookies[ACCESS_TOKEN_COOKIE];
 
-  console.log(req.cookies);
-
   if (!accessToken) {
     return next(new UnauthorizedError('You must be authorized to access this endpoint'));
   }

@@ -8,7 +8,7 @@ class FeedbacksService {
    * @returns {Promise<Feedback>}
    */
   async create(userId, feedback) {
-    return feedbacksRepository.create({ ...feedback, authorId: userId });
+    return feedbacksRepository.create({ ...feedback, author: userId });
   }
 
   /**
@@ -34,11 +34,8 @@ class FeedbacksService {
     await feedbacksRepository.deleteById(id);
   }
 
-  /**
-   * @returns {Promise<Feedback[]>}
-   */
-  async find() {
-    return feedbacksRepository.find();
+  async findWithAuthors() {
+    return feedbacksRepository.findWithAuthors();
   }
 }
 

@@ -44,7 +44,7 @@ class FeedbacksController {
   /** @type ControllerMethod */
   findFeedbacks = async (req, res, next) => {
     try {
-      const feedbacks = await feedbacksService.find();
+      const feedbacks = await feedbacksService.findWithAuthors();
 
       res.status(200).json({ items: feedbacks });
     } catch (err) {

@@ -5,6 +5,7 @@ import {
   createFeedbackSchema,
   deleteFeedbackByIdSchema,
   findFeedbackByIdSchema,
+  findFeedbacksSchema,
 } from '../validation-schemas/feebacks.validation-schemas.js';
 import { authorized } from '../../auth/middlewares/authorized.middleware.js';
 import { USER_ROLE } from '../../users/types/users.types.js';
@@ -13,7 +14,7 @@ const router = express.Router();
 
 router.post('/', authorized(), applyValidation(createFeedbackSchema), feedbacksController.createFeedback);
 
-router.get('/', feedbacksController.findFeedbacks);
+router.get('/', applyValidation(findFeedbacksSchema), feedbacksController.findFeedbacks);
 
 router.get('/:id', applyValidation(findFeedbackByIdSchema), feedbacksController.findFeedbackById);
 

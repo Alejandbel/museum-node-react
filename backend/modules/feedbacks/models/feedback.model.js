@@ -4,8 +4,8 @@ const feedbackSchema = new mongoose.Schema(
   {
     title: { type: String, required: true },
     rating: { type: Number, required: true },
-    content: { type: Date },
-    authorId: { type: mongoose.Types.ObjectId, ref: 'user' },
+    content: { type: String, required: true },
+    author: { type: mongoose.Types.ObjectId, ref: 'user' },
     __v: { type: Number, select: false },
   },
   { timestamps: true },

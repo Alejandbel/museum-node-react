@@ -6,7 +6,7 @@ const exhibitSchema = new mongoose.Schema(
     typesOfArt: { type: [String], required: true },
     receiptDate: { type: Date, required: true },
     imagePath: String,
-    employeeId: { type: mongoose.Types.ObjectId, ref: 'user' },
+    employee: { type: mongoose.Types.ObjectId, ref: 'user' },
     __v: { type: Number, select: false },
   },
   { timestamps: true },
