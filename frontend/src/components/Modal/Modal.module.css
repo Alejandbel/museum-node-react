@@ -1,0 +1,13 @@
+.modal {
+    max-width: 20rem;
+    padding: 2rem;
+    border: 0;
+    border-radius: 0.5rem;
+}
+
+.closeButton {
+    font-size: .75em;
+    position: absolute;
+    top: .25em;
+    right: .25em;
+}

@@ -6,6 +6,7 @@ import Layout from '../Layout';
 import ArticlesPage from '../../pages/articles/ArticlesPage';
 import LoginPage from '../../pages/login/LoginPage';
 import ArticleDetailsPage from '../../pages/articles/ArticleDetailsPage';
+import FeedbackListPage from '../../pages/feedbacks/FeedbackListPage';
 
 function AppRoutes() {
   return (
@@ -16,6 +17,7 @@ function AppRoutes() {
           <Route index element={<ArticlesPage />} />
           <Route path=":articleId" element={<ArticleDetailsPage />} />
         </Route>
+        <Route path="feedbacks" element={<FeedbackListPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>

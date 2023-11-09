@@ -3,9 +3,11 @@ import { useEffect, useState } from 'react';
 /**
  * @template T
  * @param {() => Promise<T>} fn
- * @return {{isLoading: boolean, result: T, error: unknown}}
+ * @param {{deps?: Array<*>}} [params]
+ * @return {{isLoading: boolean, result: T, error: unknown, refetch: () => void}}
  */
-export function useQuery(fn) {
+export function useQuery(fn, { deps = [] } = {}) {
+  const [refetchCount, setRefetchCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [fnResult, setFnResult] = useState();
   const [error, setError] = useState();
@@ -17,7 +19,13 @@ export function useQuery(fn) {
     }).catch((err) => {
       setError(err);
     });
-  }, []);
+  }, [...deps, refetchCount]);
 
-  return { isLoading: loading, result: fnResult, error };
+  const refetch = () => {
+    setRefetchCount((count) => count + 1);
+  };
+
+  return {
+    isLoading: loading, result: fnResult, error, refetch,
+  };
 }

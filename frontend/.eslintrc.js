@@ -34,5 +34,10 @@ module.exports = {
     'no-void': 'off',
     'import/prefer-default-export': 'off',
     'class-methods-use-this': 'off',
+    'no-restricted-exports': 'off',
+    'react/jsx-one-expression-per-line': 'off',
+    'react/button-has-type': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/destructuring-assignment': 'off',
   },
 };
