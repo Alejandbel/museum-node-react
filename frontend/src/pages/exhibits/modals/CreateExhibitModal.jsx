@@ -14,6 +14,7 @@ function CreateExhibitModal({ isOpen, onSubmit, userList }) {
   const employeeRef = useRef(null);
   const typeOfArtsRef = useRef(null);
   const receiptDateRef = useRef(null);
+  const fileRef = useRef(null);
 
   const onModalSubmit = (e) => {
     e.preventDefault();
@@ -22,14 +23,14 @@ function CreateExhibitModal({ isOpen, onSubmit, userList }) {
     const employee = employeeRef.current.value;
     const typesOfArt = typeOfArtsRef.current.value?.split(',');
     const receiptDate = receiptDateRef.current.value;
-
-    // TODO: validate
+    const file = fileRef.current.files?.[0];
 
     onSubmit({
       title,
       employee,
       typesOfArt,
       receiptDate,
+      file,
     });
   };
 
@@ -49,6 +50,7 @@ function CreateExhibitModal({ isOpen, onSubmit, userList }) {
         />
         <Input ref={typeOfArtsRef} type="text" name="typeOfArts" label="Type of arts" />
         <Input ref={receiptDateRef} type="date" name="receiptDate" label="Receipt date" />
+        <Input ref={fileRef} type="file" name="file" label="Image" />
         <input type="submit" value="Sumbit" />
       </form>
     </Modal>
