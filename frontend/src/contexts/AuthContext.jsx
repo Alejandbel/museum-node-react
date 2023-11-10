@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID } from '../config';
-import { usersService } from '../services/usersService';
-import { authService } from '../services/authService';
+import { usersService } from '../services/api/usersService';
+import { authService } from '../services/api/authService';
 
 export const AuthContext = React.createContext(undefined);
 

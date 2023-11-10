@@ -2,6 +2,10 @@ import React, { useRef } from 'react';
 import Modal from '../../../components/Modal';
 import Input from '../../../components/forms/Input';
 
+/**
+ * @param {boolean} isOpen
+ * @param {(feedback: Pick<Feedback, 'title' | 'rating' | 'content'>) => unknown}onSubmit
+ */
 function CreateFeedbackModal({ isOpen, onSubmit }) {
   const titleRef = useRef(null);
   const ratingRef = useRef(null);

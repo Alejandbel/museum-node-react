@@ -1,14 +1,18 @@
-import React from 'react';
 import { useAuth } from '../../hooks/useAuth';
 
-function PrivateOrEmpty({ children: Children, allowedRoles }) {
+/**
+ * @param children
+ * @param {UserRole[]} allowedRoles
+ * @constructor
+ */
+function PrivateOrEmpty({ children, allowedRoles }) {
   const { currentUser } = useAuth();
 
   if (!currentUser || (allowedRoles && !allowedRoles.includes(currentUser.role))) {
     return null;
   }
 
-  return <Children />;
+  return children;
 }
 
 export default PrivateOrEmpty;

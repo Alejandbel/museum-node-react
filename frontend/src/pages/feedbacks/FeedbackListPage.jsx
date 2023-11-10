@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useQuery } from '../../hooks/useQuery';
-import { feedbacksService } from '../../services/feedbacksService';
+import { feedbacksService } from '../../services/api';
 import NotFoundPage from '../notFound/NotFoundPage';
 import FeedbackList from '../../components/feedbacks/FeedbackList';
 import CreateFeedbackModal from './modals/CreateFeedbackModal';
@@ -17,13 +17,13 @@ function FeedbackListPage() {
 
   const onModalSubmit = async (feedback) => {
     await feedbacksService.createFeedback(feedback);
-    await refetch();
     setModalOpen(false);
+    refetch();
   };
 
   return !isLoading && (
     <>
-      <button type="button" onClick={() => setModalOpen(true)}>Leave feedback</button>
+      <button onClick={() => setModalOpen(true)}>Leave feedback</button>
       <CreateFeedbackModal hasCloseBtn isOpen={isModalOpen} onSubmit={onModalSubmit} />
       <FeedbackList feedbacks={result.items} />
     </>

@@ -1,7 +1,7 @@
 import React from 'react';
 import ArticleList from '../../components/articles/ArticleList';
 import { useQuery } from '../../hooks/useQuery';
-import { articlesService } from '../../services/articlesService';
+import { articlesService } from '../../services/api';
 import NotFoundPage from '../notFound/NotFoundPage';
 
 function ArticlesPage() {

@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import ArticleDetails from '../../components/articles/ArticleDetails';
 import NotFoundPage from '../notFound/NotFoundPage';
 import { useQuery } from '../../hooks/useQuery';
-import { articlesService } from '../../services/articlesService';
+import { articlesService } from '../../services/api';
 
 function ArticleDetailsPage() {
   const { articleId } = useParams();

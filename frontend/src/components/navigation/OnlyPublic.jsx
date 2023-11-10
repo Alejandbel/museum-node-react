@@ -1,15 +1,15 @@
 import React from 'react';
 import { Navigate } from 'react-router-dom';
-import { useAuth } from 'src/hooks/useAuth';
+import { useAuth } from '../../hooks/useAuth';
 
-const OnlyPublic = ({ children: Children }) => {
+function OnlyPublic({ children }) {
   const { currentUser } = useAuth();
 
   if (currentUser) {
-    return <Navigate to="/"/>;
+    return <Navigate to="/" />;
   }
 
-  return <>{Children}</>;
-};
+  return children;
+}
 
 export default OnlyPublic;
