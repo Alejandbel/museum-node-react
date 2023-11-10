@@ -19,6 +19,19 @@ class UsersController {
       next(err);
     }
   };
+
+  /** @type ControllerMethod */
+  getUserList = async (req, res, next) => {
+    try {
+      const users = await usersService.find();
+
+      return res.json({
+        items: users,
+      });
+    } catch (err) {
+      next(err);
+    }
+  };
 }
 
 export const usersController = new UsersController();

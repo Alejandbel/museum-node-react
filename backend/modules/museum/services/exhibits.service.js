@@ -1,12 +1,14 @@
 import { EntityNotFoundError } from '../../core/index.js';
 import { exhibitsRepository } from '../repositories/exhibits.repository.js';
+import { usersService } from '../../users/services/users.service.js';
 
 class ExhibitsService {
   /**
-   * @param {Omit<Exhibit, '_id' | 'createdAt' | 'updatedAt'>} exhibit
+   * @param {Omit<Exhibit, '_id' | 'createdAt' | 'updatedAt' >} exhibit
    * @returns {Promise<Exhibit>}
    */
   async create(exhibit) {
+    await usersService.findById(exhibit.employee);
     return exhibitsRepository.create(exhibit);
   }
 
@@ -33,11 +35,8 @@ class ExhibitsService {
     await exhibitsRepository.deleteById(id);
   }
 
-  /**
-   * @returns {Promise<Exhibit[]>}
-   */
-  async find() {
-    return exhibitsRepository.find();
+  async findWithEmployees() {
+    return exhibitsRepository.findWithEmployees();
   }
 }
 

@@ -43,7 +43,7 @@ class ExhibitsController {
   /** @type ControllerMethod */
   findExhibits = async (req, res, next) => {
     try {
-      const exhibits = await exhibitsService.find();
+      const exhibits = await exhibitsService.findWithEmployees();
 
       res.status(200).json({ items: exhibits });
     } catch (err) {

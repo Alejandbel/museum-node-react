@@ -38,6 +38,13 @@ class UsersService {
 
     return user;
   }
+
+  /**
+   * @returns {Promise<User[]>}
+   */
+  async find() {
+    return usersRepository.find();
+  }
 }
 
 export const usersService = new UsersService();

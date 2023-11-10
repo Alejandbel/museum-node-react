@@ -5,17 +5,25 @@ import {
   createExhibitSchema,
   deleteExhibitByIdSchema,
   findExhibitByIdSchema,
+  findExhibitsSchema,
 } from '../validation-schemas/exhibits.validation-schemas.js';
+import { authorized } from '../../auth/middlewares/authorized.middleware.js';
+import { USER_ROLE } from '../../users/types/users.types.js';
 
 const router = express.Router();
 
-router.post('/', applyValidation(createExhibitSchema), exhibitsController.createExhibit);
+router.post('/', authorized([USER_ROLE.ADMIN]), applyValidation(createExhibitSchema), exhibitsController.createExhibit);
 
-router.get('/', exhibitsController.findExhibits);
+router.get('/', applyValidation(findExhibitsSchema), exhibitsController.findExhibits);
 
 router.get('/:id', applyValidation(findExhibitByIdSchema), exhibitsController.findExhibitById);
 
-router.delete('/:id', applyValidation(deleteExhibitByIdSchema), exhibitsController.deleteExhibitById);
+router.delete(
+  '/:id',
+  authorized([USER_ROLE.ADMIN]),
+  applyValidation(deleteExhibitByIdSchema),
+  exhibitsController.deleteExhibitById,
+);
 
 /**
  * @param {import('express').IRouter}routing
