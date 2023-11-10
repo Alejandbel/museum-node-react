@@ -1,12 +1,22 @@
 import { exhibitsService } from '../services/exhibits.service.js';
+import * as url from 'url';
 
 class ExhibitsController {
   /** @type ControllerMethod */
   createExhibit = async (req, res, next) => {
     try {
       const exhibit = req.body;
+      const file = req.file;
 
-      const createdExhibit = await exhibitsService.create(exhibit);
+      console.log(
+        url.format({
+          protocol: req.protocol,
+          host: req.get('host'),
+          pathname: req.originalUrl,
+        }),
+      );
+
+      const createdExhibit = await exhibitsService.create({ ...exhibit, imagePath: file.filename });
 
       res.status(201).json(createdExhibit);
     } catch (err) {

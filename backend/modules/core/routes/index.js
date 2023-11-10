@@ -5,6 +5,7 @@ import { mountAuthRoutes } from '../../auth/index.js';
 import { mountExhibitRouter } from '../../museum/index.js';
 import { mountFeedbackRouter } from '../../feedbacks/index.js';
 import { mountUsersRouter } from '../../users/index.js';
+import { mountFileStorageRouter } from '../../file-storage/index.js';
 
 const router = express.Router();
 
@@ -13,6 +14,7 @@ mountAuthRoutes(router);
 mountUsersRouter(router);
 mountExhibitRouter(router);
 mountFeedbackRouter(router);
+mountFileStorageRouter(router);
 
 /**
  * @param {import('express').IRouter} routing

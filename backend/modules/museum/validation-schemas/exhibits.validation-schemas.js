@@ -1,5 +1,6 @@
 import Joi from 'joi';
 import { idValidationSchema, mongoIdSchema } from '../../core/index.js';
+import { fileStorageService } from '../../file-storage/services/file-storage.service.js';
 
 export const createExhibitBodySchema = Joi.object({
   title: Joi.string().required(),
@@ -28,7 +29,7 @@ export const findExhibitsResponseSchema = Joi.object({
       title: Joi.string().required(),
       typesOfArt: Joi.array().items(Joi.string().required()).required(),
       receiptDate: Joi.date().required(),
-      imagePath: Joi.string(),
+      imagePath: Joi.string().custom((value) => fileStorageService.getAbsolutePath(value)),
       employee: Joi.object({
         _id: mongoIdSchema,
         firstname: Joi.string().required(),
