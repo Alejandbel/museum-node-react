@@ -6,7 +6,7 @@ import React from 'react';
  */
 function Feedback({ feedback }) {
   return (
-    <article>
+    <article className="block">
       <h2>
         {feedback.title} {feedback.rating} / 5
       </h2>

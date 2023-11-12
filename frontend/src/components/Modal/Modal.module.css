@@ -1,6 +1,9 @@
 .modal {
-    max-width: 20rem;
-    padding: 2rem;
+    position: fixed;
+    max-width: 30rem;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
     border: 0;
     border-radius: 0.5rem;
 }
@@ -8,6 +11,7 @@
 .closeButton {
     font-size: .75em;
     position: absolute;
+    padding: .25em;
     top: .25em;
     right: .25em;
 }

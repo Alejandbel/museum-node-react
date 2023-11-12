@@ -8,6 +8,11 @@ import LoginPage from '../../pages/login/LoginPage';
 import ArticleDetailsPage from '../../pages/articles/ArticleDetailsPage';
 import FeedbackListPage from '../../pages/feedbacks/FeedbackListPage';
 import ExhibitListPage from '../../pages/exhibits/ExhibitListPage';
+import SignUpPage from '../../pages/sign-up/SignUpPage';
+import LogoutPage from '../../pages/logout/LogoutPage';
+import OnlyPublic from './OnlyPublic';
+import Private from './Private';
+import ExhibitDetailsPage from '../../pages/exhibits/ExhibitDetailsPage';
 
 function AppRoutes() {
   return (
@@ -20,10 +25,12 @@ function AppRoutes() {
         </Route>
         <Route path="exhibits">
           <Route index element={<ExhibitListPage />} />
-          <Route path=":exhibitId" element={null} />
+          <Route path=":exhibitId" element={<ExhibitDetailsPage />} />
         </Route>
         <Route path="feedbacks" element={<FeedbackListPage />} />
-        <Route path="login" element={<LoginPage />} />
+        <Route path="login" element={<OnlyPublic><LoginPage /></OnlyPublic>} />
+        <Route path="sign-up" element={<OnlyPublic><SignUpPage /></OnlyPublic>} />
+        <Route path="logout" element={<Private><LogoutPage /></Private>} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

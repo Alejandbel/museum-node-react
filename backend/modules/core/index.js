@@ -3,6 +3,7 @@ export * from './errors/index.js';
 export * from './middlewares/index.js';
 export * from './repositories/index.js';
 export * from './routes/index.js';
+export * from './types/common.types.js';
 export * from './utils/index.js';
 export * from './validation-schemas/index.js';
 export * from './app.js';

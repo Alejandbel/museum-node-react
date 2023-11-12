@@ -8,14 +8,6 @@ class ExhibitsController {
       const exhibit = req.body;
       const file = req.file;
 
-      console.log(
-        url.format({
-          protocol: req.protocol,
-          host: req.get('host'),
-          pathname: req.originalUrl,
-        }),
-      );
-
       const createdExhibit = await exhibitsService.create({ ...exhibit, imagePath: file.filename });
 
       res.status(201).json(createdExhibit);
@@ -29,7 +21,25 @@ class ExhibitsController {
     try {
       const { id } = req.params;
 
-      const exhibit = await exhibitsService.findById(id);
+      const exhibit = await exhibitsService.findByIdWithEmployee(id);
+
+      res.status(200).json(exhibit);
+    } catch (err) {
+      next(err);
+    }
+  };
+
+  /** @type ControllerMethod */
+  updateExhibitById = async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const exhibitToUpdate = req.body;
+      const file = req.file;
+      if (file) {
+        exhibitToUpdate.imagePath = file.filename;
+      }
+
+      const exhibit = await exhibitsService.updateById(id, exhibitToUpdate);
 
       res.status(200).json(exhibit);
     } catch (err) {
@@ -53,7 +63,9 @@ class ExhibitsController {
   /** @type ControllerMethod */
   findExhibits = async (req, res, next) => {
     try {
-      const exhibits = await exhibitsService.findWithEmployees();
+      const { search, sortField, sortDirection } = req.query;
+
+      const exhibits = await exhibitsService.findWithEmployees({ search, sortField, sortDirection });
 
       res.status(200).json({ items: exhibits });
     } catch (err) {

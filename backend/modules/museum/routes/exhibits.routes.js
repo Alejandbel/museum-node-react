@@ -6,6 +6,7 @@ import {
   deleteExhibitByIdSchema,
   findExhibitByIdSchema,
   findExhibitsSchema,
+  updateExhibitByIdSchema,
 } from '../validation-schemas/exhibits.validation-schemas.js';
 import { authorized } from '../../auth/middlewares/authorized.middleware.js';
 import { USER_ROLE } from '../../users/types/users.types.js';
@@ -15,8 +16,8 @@ const router = express.Router();
 
 router.post(
   '/',
-  upload.single('file'),
   authorized([USER_ROLE.ADMIN]),
+  upload.single('file'),
   applyValidation(createExhibitSchema),
   exhibitsController.createExhibit,
 );
@@ -24,6 +25,14 @@ router.post(
 router.get('/', applyValidation(findExhibitsSchema), exhibitsController.findExhibits);
 
 router.get('/:id', applyValidation(findExhibitByIdSchema), exhibitsController.findExhibitById);
+
+router.put(
+  '/:id',
+  authorized([USER_ROLE.ADMIN]),
+  upload.single('file'),
+  applyValidation(updateExhibitByIdSchema),
+  exhibitsController.updateExhibitById,
+);
 
 router.delete(
   '/:id',

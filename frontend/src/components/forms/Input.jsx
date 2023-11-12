@@ -11,9 +11,7 @@ import React, { forwardRef } from 'react';
 function Input(props, ref) {
   return (
     <>
-      <div>
-        <label htmlFor={props.name}>{props.label}</label>
-      </div>
+      <label htmlFor={props.name}>{props.label}</label>
       <input
         id={props.name}
         ref={ref}

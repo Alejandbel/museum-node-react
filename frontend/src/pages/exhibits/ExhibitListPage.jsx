@@ -1,46 +1,66 @@
 import React, { useState } from 'react';
 import { useQuery } from '../../hooks/useQuery';
-import { usersService } from '../../services/api';
 import NotFoundPage from '../notFound/NotFoundPage';
-import CreateExhibitModal from './modals/CreateExhibitModal';
+import ExhibitModal from './modals/ExhibitModal';
 import { exhibitsService } from '../../services/api/exhibitsService';
-import ExhibitList from '../../components/exhibits/ExhibitList';
+import ExhibitList from './ExhibitList';
+import PrivateOrEmpty from '../../components/navigation/PrivateOrEmpty';
+import { USER_ROLE } from '../../types/users';
+import { BOOL_TO_SORT_DIRECTION } from '../../types/sort';
 
 function ExhibitListPage() {
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [sortParams, setSortParams] = useState(
+    { asc: true, sortField: undefined },
+  );
+  const [search, setSearch] = useState(undefined);
+
   const {
-    isLoading: isExhibitsLoading,
+    isLoading,
     result: exhibits,
-    error: exhibitsError,
+    error,
     refetch: refetchExhibits,
-  } = useQuery(() => exhibitsService.findExhibits());
+  } = useQuery(() => exhibitsService.findExhibits(
+    {
+      search,
+      sortDirection: BOOL_TO_SORT_DIRECTION[sortParams.asc],
+      sortField: sortParams.sortField,
+    },
+  ), { deps: [search, sortParams.asc, sortParams.sortField] });
 
-  const {
-    isLoading: isUsersLoading,
-    result: users,
-    error: usersError,
-  } = useQuery(() => usersService.getUserList());
-
-  if (exhibitsError || usersError) {
+  if (error) {
     return <NotFoundPage />;
   }
 
   const onModalSubmit = async (exhibit) => {
-    setModalOpen(false);
     await exhibitsService.createExhibit(exhibit);
     refetchExhibits();
   };
 
-  return (!isExhibitsLoading && !isUsersLoading) && (
+  const onSearchInput = (e) => {
+    const q = e.target.value;
+    setSearch(q);
+  };
+
+  const onSortClick = (e) => {
+    const sortField = e.target?.dataset?.field;
+    let asc = true;
+
+    if (sortParams.sortField === sortField) {
+      asc = !sortParams.asc;
+    }
+
+    setSortParams({ asc, sortField });
+  };
+
+  return !isLoading && (
     <>
-      <button onClick={() => setModalOpen(true)}>Add exhibit</button>
-      <CreateExhibitModal
-        hasCloseBtn
-        isOpen={isModalOpen}
-        onSubmit={onModalSubmit}
-        userList={users.items}
-      />
-      <ExhibitList exhibits={exhibits.items} />
+      <input type="text" onInput={onSearchInput} />
+      <button data-field="title" onClick={onSortClick}>Title</button>
+      <button data-field="receiptDate" onClick={onSortClick}>Receipt date</button>
+      <PrivateOrEmpty allowedRoles={[USER_ROLE.ADMIN]}>
+        <ExhibitModal onSubmit={onModalSubmit} buttonText="Add exhibit" />
+      </PrivateOrEmpty>
+      <ExhibitList refetch={refetchExhibits} exhibits={exhibits.items} />
     </>
   );
 }

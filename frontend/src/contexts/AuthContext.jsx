@@ -1,10 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 import { GOOGLE_CLIENT_ID } from '../config';
-import { usersService } from '../services/api/usersService';
-import { authService } from '../services/api/authService';
+import { authService, usersService } from '../services/api';
+import { handleAxiosErrorMessageToast } from '../utils/toasts';
 
-export const AuthContext = React.createContext(undefined);
+export const AuthContext = React.createContext(null);
 
 function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
@@ -12,55 +12,57 @@ function AuthProvider({ children }) {
 
   useEffect(() => {
     const effect = async () => {
-      const user = await usersService.getCurrentUser().catch(() => null);
+      const user = await usersService.getCurrentUser().catch(handleAxiosErrorMessageToast);
       setCurrentUser(user);
       setLoading(false);
     };
 
-    effect().catch(console.error);
+    effect().catch(handleAxiosErrorMessageToast);
   }, []);
 
-  // async function signup() {
-  //   setLoading(true);
-  //   const user = null; // TODO: signup
-  //   setCurrentUser(user);
-  //   setLoading(false);
-  // }
+  async function signUp({
+    email, password, firstname, lastname,
+  }) {
+    await authService.signUp({
+      email, password, firstname, lastname,
+    });
+
+    const user = await usersService.getCurrentUser().catch(() => null);
+    setCurrentUser(user);
+  }
+
+  async function signIn({
+    email, password,
+  }) {
+    await authService.signIn({ email, password });
+    const user = await usersService.getCurrentUser().catch(() => null);
+
+    setCurrentUser(user);
+  }
 
   async function signInWithFacebook(token) {
-    setLoading(true);
     await authService.signInWithFacebook(token);
     const user = await usersService.getCurrentUser().catch(() => null);
     setCurrentUser(user);
-    setLoading(false);
   }
 
   async function signInWithGoogle(token) {
-    setLoading(true);
     await authService.signInWithGoogle(token);
     const user = await usersService.getCurrentUser().catch(() => null);
     setCurrentUser(user);
-    setLoading(false);
   }
 
-  // async function login() {
-  //   setLoading(true);
-  //   const user = null; // TODO: login
-  //   setCurrentUser(user);
-  //   setLoading(false);
-  // }
-
   async function logout() {
-    setLoading(true);
-    await authService.logout();
+    await authService.logout().catch(handleAxiosErrorMessageToast);
     setCurrentUser(null);
-    setLoading(false);
   }
 
   const value = useMemo(() => ({
-    currentUser,
+    user: currentUser,
     signInWithFacebook,
     signInWithGoogle,
+    signUp,
+    signIn,
     logout,
   }), [currentUser]);
 

@@ -40,6 +40,14 @@ class UsersService {
   }
 
   /**
+   * @param {string} email
+   * @returns {Promise<User|null>}
+   */
+  async findByEmail(email) {
+    return usersRepository.findOne({ email });
+  }
+
+  /**
    * @returns {Promise<User[]>}
    */
   async find() {

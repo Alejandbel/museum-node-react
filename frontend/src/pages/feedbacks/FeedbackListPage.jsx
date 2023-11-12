@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '../../hooks/useQuery';
 import { feedbacksService } from '../../services/api';
 import NotFoundPage from '../notFound/NotFoundPage';
-import FeedbackList from '../../components/feedbacks/FeedbackList';
+import FeedbackList from './FeedbackList';
 import CreateFeedbackModal from './modals/CreateFeedbackModal';
+import Stack from '../../components/Stack';
 
 function FeedbackListPage() {
-  const [isModalOpen, setModalOpen] = useState(false);
   const {
     isLoading, result, error, refetch,
   } = useQuery(() => feedbacksService.findFeedbacks());
@@ -17,16 +17,14 @@ function FeedbackListPage() {
 
   const onModalSubmit = async (feedback) => {
     await feedbacksService.createFeedback(feedback);
-    setModalOpen(false);
     refetch();
   };
 
   return !isLoading && (
-    <>
-      <button onClick={() => setModalOpen(true)}>Leave feedback</button>
-      <CreateFeedbackModal hasCloseBtn isOpen={isModalOpen} onSubmit={onModalSubmit} />
+    <Stack>
+      <CreateFeedbackModal onSubmit={onModalSubmit} />
       <FeedbackList feedbacks={result.items} />
-    </>
+    </Stack>
   );
 }
 

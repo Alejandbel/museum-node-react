@@ -17,6 +17,16 @@ export class BaseRepository {
 
   /**
    * @param id
+   * @param {Record<*, *>} documentToUpdate
+   */
+  async updateById(id, documentToUpdate) {
+    /** @type {{toObject()}} */
+    const document = await this.model.findByIdAndUpdate(id, documentToUpdate);
+    return document.toObject();
+  }
+
+  /**
+   * @param id
    */
   async findById(id) {
     return this.model.findById(id).lean();

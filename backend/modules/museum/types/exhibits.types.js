@@ -9,3 +9,8 @@
  * @property {Date} createdAt
  * @property {Date} updatedAt
  */
+
+export const EXHIBIT_SORT_FIELD = {
+  TITLE: 'title',
+  RECEIPT_DATE: 'receiptDate',
+};

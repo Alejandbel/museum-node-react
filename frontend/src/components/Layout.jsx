@@ -4,7 +4,7 @@ import Navbar from './navigation/Navbar';
 
 function Layout() {
   return (
-    <div>
+    <>
       <header>
         <Navbar />
       </header>
@@ -13,10 +13,8 @@ function Layout() {
         <Outlet />
       </main>
 
-      <footer>
-        Footer
-      </footer>
-    </div>
+      <footer>&copy; 2023 Museum app. All rights reserved.</footer>
+    </>
   );
 }
 

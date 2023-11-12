@@ -1,5 +1,5 @@
 import React from 'react';
-import ArticleList from '../../components/articles/ArticleList';
+import ArticleList from './ArticleList';
 import { useQuery } from '../../hooks/useQuery';
 import { articlesService } from '../../services/api';
 import NotFoundPage from '../notFound/NotFoundPage';

@@ -3,13 +3,13 @@ import { Navigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 
 function Private({ children, allowedRoles }) {
-  const { currentUser } = useAuth();
+  const { user } = useAuth();
 
-  if (!currentUser) {
+  if (!user) {
     return <Navigate to="/login" />;
   }
 
-  if (allowedRoles && !allowedRoles.includes(currentUser.role)) {
+  if (allowedRoles && !allowedRoles.includes(user.role)) {
     return <Navigate to="/" />;
     // return <NotAllowed/>;
   }

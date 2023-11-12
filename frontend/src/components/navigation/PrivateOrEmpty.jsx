@@ -6,9 +6,9 @@ import { useAuth } from '../../hooks/useAuth';
  * @constructor
  */
 function PrivateOrEmpty({ children, allowedRoles }) {
-  const { currentUser } = useAuth();
+  const { user } = useAuth();
 
-  if (!currentUser || (allowedRoles && !allowedRoles.includes(currentUser.role))) {
+  if (!user || (allowedRoles && !allowedRoles.includes(user.role))) {
     return null;
   }
 
