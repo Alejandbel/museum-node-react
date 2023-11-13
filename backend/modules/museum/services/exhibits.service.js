@@ -19,6 +19,10 @@ class ExhibitsService {
    */
   async updateById(id, exhibit) {
     await this.findById(id);
+    if (exhibit.employee) {
+      await usersService.findById(exhibit.employee);
+    }
+
     return exhibitsRepository.updateById(id, exhibit);
   }
 

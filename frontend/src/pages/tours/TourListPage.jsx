@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { useQuery } from '../../hooks/useQuery';
 import NotFoundPage from '../not-found/NotFoundPage';
-import ExhibitModal from './modals/ExhibitModal';
-import { exhibitsService } from '../../services/api/exhibitsService';
-import ExhibitList from './ExhibitList';
+import TourModal from './modals/TourModal';
+import TourList from './TourList';
 import PrivateOrEmpty from '../../components/navigation/PrivateOrEmpty';
 import { USER_ROLE } from '../../types/users';
 import { BOOL_TO_SORT_DIRECTION } from '../../types/sort';
+import { toursService } from '../../services/api';
 import Stack from '../../components/Stack';
 
-function ExhibitListPage() {
+function TourListPage() {
   const [sortParams, setSortParams] = useState(
     { asc: true, sortField: undefined },
   );
@@ -17,10 +17,10 @@ function ExhibitListPage() {
 
   const {
     isLoading,
-    result: exhibits,
+    result: tours,
     error,
-    refetch: refetchExhibits,
-  } = useQuery(() => exhibitsService.findExhibits(
+    refetch,
+  } = useQuery(() => toursService.findTours(
     {
       search,
       sortDirection: BOOL_TO_SORT_DIRECTION[sortParams.asc],
@@ -32,14 +32,9 @@ function ExhibitListPage() {
     return <NotFoundPage />;
   }
 
-  const onModalSubmit = async (exhibit) => {
-    await exhibitsService.createExhibit(exhibit);
-    refetchExhibits();
-  };
-
-  const onSearchInput = (e) => {
-    const q = e.target.value;
-    setSearch(q);
+  const onModalSubmit = async (tour) => {
+    await toursService.createTour(tour);
+    await refetch();
   };
 
   const onSortClick = (e) => {
@@ -53,22 +48,26 @@ function ExhibitListPage() {
     setSortParams({ asc, sortField });
   };
 
+  const onSearchInput = (e) => {
+    const q = e.target.value;
+    setSearch(q);
+  };
+
   return !isLoading && (
     <Stack>
       <div>
-        <input type="text" className="input" placeholder="Search for exhibits" onInput={onSearchInput} />
+        <input className="input" type="text" placeholder="Search for tours" onInput={onSearchInput} />
       </div>
       <div>
         Order by:
         <button className="button button-blue" data-field="title" onClick={onSortClick}>Title</button>
-        <button className="button button-blue" data-field="receiptDate" onClick={onSortClick}>Receipt date</button>
       </div>
       <PrivateOrEmpty allowedRoles={[USER_ROLE.ADMIN]}>
-        <ExhibitModal className="button button-green" onSubmit={onModalSubmit} buttonText="Add exhibit" />
+        <TourModal className="button button-green" onSubmit={onModalSubmit} buttonText="Add tour" />
       </PrivateOrEmpty>
-      <ExhibitList refetch={refetchExhibits} exhibits={exhibits.items} />
+      <TourList tours={tours.items} />
     </Stack>
   );
 }
 
-export default ExhibitListPage;
+export default TourListPage;

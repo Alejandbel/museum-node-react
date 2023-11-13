@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from '../../pages/home/HomePage';
-import NotFoundPage from '../../pages/notFound/NotFoundPage';
+import NotFoundPage from '../../pages/not-found/NotFoundPage';
 import Layout from '../Layout';
 import ArticlesPage from '../../pages/articles/ArticlesPage';
 import LoginPage from '../../pages/login/LoginPage';
@@ -14,6 +14,7 @@ import OnlyPublic from './OnlyPublic';
 import Private from './Private';
 import ExhibitDetailsPage from '../../pages/exhibits/ExhibitDetailsPage';
 import AdditionalPage from '../../pages/additional/AdditionalPage';
+import TourListPage from '../../pages/tours/TourListPage';
 
 function AppRoutes() {
   return (
@@ -29,6 +30,7 @@ function AppRoutes() {
           <Route path=":exhibitId" element={<ExhibitDetailsPage />} />
         </Route>
         <Route path="feedbacks" element={<FeedbackListPage />} />
+        <Route path="tours" element={<TourListPage />} />
         <Route path="login" element={<OnlyPublic><LoginPage /></OnlyPublic>} />
         <Route path="sign-up" element={<OnlyPublic><SignUpPage /></OnlyPublic>} />
         <Route path="logout" element={<Private><LogoutPage /></Private>} />

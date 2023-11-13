@@ -1,5 +1,4 @@
 import { exhibitsService } from '../services/exhibits.service.js';
-import * as url from 'url';
 
 class ExhibitsController {
   /** @type ControllerMethod */

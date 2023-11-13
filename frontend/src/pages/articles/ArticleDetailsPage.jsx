@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import ArticleDetails from './ArticleDetails';
-import NotFoundPage from '../notFound/NotFoundPage';
+import NotFoundPage from '../not-found/NotFoundPage';
 import { useQuery } from '../../hooks/useQuery';
 import { articlesService } from '../../services/api';
 

@@ -50,8 +50,8 @@ export const findExhibitsResponseSchema = Joi.object({
 
 export const findExhibitsQuerySchema = Joi.object({
   search: Joi.string(),
-  sortDirection: Joi.allow(...Object.values(SORT_DIRECTION)),
-  sortField: Joi.allow(...Object.values(EXHIBIT_SORT_FIELD)),
+  sortDirection: Joi.valid(...Object.values(SORT_DIRECTION)),
+  sortField: Joi.valid(...Object.values(EXHIBIT_SORT_FIELD)),
 });
 
 export const findExhibitsSchema = {

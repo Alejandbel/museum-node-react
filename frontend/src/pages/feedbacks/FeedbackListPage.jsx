@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '../../hooks/useQuery';
 import { feedbacksService } from '../../services/api';
-import NotFoundPage from '../notFound/NotFoundPage';
+import NotFoundPage from '../not-found/NotFoundPage';
 import FeedbackList from './FeedbackList';
 import CreateFeedbackModal from './modals/CreateFeedbackModal';
 import Stack from '../../components/Stack';

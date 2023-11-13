@@ -5,8 +5,9 @@ class ArticlesController {
   createArticle = async (req, res, next) => {
     try {
       const article = req.body;
+      const file = req.file;
 
-      const createdArticle = await articlesService.create(article);
+      const createdArticle = await articlesService.create({ ...article, imagePath: file.filename });
 
       res.status(201).json(createdArticle);
     } catch (err) {

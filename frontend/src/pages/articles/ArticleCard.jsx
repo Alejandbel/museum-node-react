@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
  */
 function ArticleCard({ article }) {
   return (
-    <article>
+    <article className="block">
       <div>
         <h3>{article.title}</h3>
         <p>

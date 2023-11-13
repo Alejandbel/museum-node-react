@@ -2,7 +2,7 @@ import express from 'express';
 
 import { mountArticlesRouter } from '../../articles/index.js';
 import { mountAuthRoutes } from '../../auth/index.js';
-import { mountExhibitRouter } from '../../museum/index.js';
+import { mountExhibitRouter, mountToursRouter } from '../../museum/index.js';
 import { mountFeedbackRouter } from '../../feedbacks/index.js';
 import { mountUsersRouter } from '../../users/index.js';
 import { mountFileStorageRouter } from '../../file-storage/index.js';
@@ -15,6 +15,7 @@ mountUsersRouter(router);
 mountExhibitRouter(router);
 mountFeedbackRouter(router);
 mountFileStorageRouter(router);
+mountToursRouter(router);
 
 /**
  * @param {import('express').IRouter} routing

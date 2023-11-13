@@ -1,13 +1,26 @@
 import express from 'express';
 import { articlesController } from '../controllers/articles.controller.js';
 import { applyValidation } from '../../core/index.js';
-import { creteArticleSchema, findArticleByIdSchema } from '../validation-schemas/articles.validation-schemas.js';
+import {
+  creteArticleSchema,
+  findArticleByIdSchema,
+  findArticlesSchema,
+} from '../validation-schemas/articles.validation-schemas.js';
+import { authorized } from '../../auth/middlewares/authorized.middleware.js';
+import { USER_ROLE } from '../../users/types/users.types.js';
+import { upload } from '../../file-storage/middlewares/file-upload.middleware.js';
 
 const router = express.Router();
 
-router.post('/', applyValidation(creteArticleSchema), articlesController.createArticle);
+router.post(
+  '/',
+  authorized([USER_ROLE.ADMIN]),
+  upload.single('file'),
+  applyValidation(creteArticleSchema),
+  articlesController.createArticle,
+);
 
-router.get('/', articlesController.findArticles);
+router.get('/', applyValidation(findArticlesSchema), articlesController.findArticles);
 
 router.get('/:id', applyValidation(findArticleByIdSchema), articlesController.findArticleById);
 

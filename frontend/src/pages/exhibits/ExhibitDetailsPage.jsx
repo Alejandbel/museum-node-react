@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQuery } from '../../hooks/useQuery';
 import { exhibitsService } from '../../services/api/exhibitsService';
-import NotFoundPage from '../notFound/NotFoundPage';
+import NotFoundPage from '../not-found/NotFoundPage';
 import Stack from '../../components/Stack';
 
 function ExhibitDetailsPage() {

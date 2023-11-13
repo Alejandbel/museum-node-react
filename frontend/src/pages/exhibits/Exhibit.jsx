@@ -19,6 +19,7 @@ function Exhibit({ exhibit, onDelete, onUpdate }) {
     <article className="exhibit">
       <h2 className="title"><Link to={`/exhibits/${exhibit._id}`}>{exhibit.title}</Link></h2>
       {exhibit.imagePath && <img src={exhibit.imagePath} alt="Exhibit" />}
+
       <PrivateOrEmpty allowedRoles={[USER_ROLE.ADMIN]}>
         <ExhibitModal className="edit button button-green" onSubmit={onUpdate} baseExhibit={exhibit} buttonText="Update" />
         <button className="delete button button-red" onClick={onExhibitDelete}>Delete</button>

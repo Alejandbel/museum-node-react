@@ -99,7 +99,7 @@ function ExhibitModal({
               name="receiptDate"
               label="Receipt date"
             />
-            <Input ref={fileRef} type="file" vname="file" label="Image" />
+            <Input ref={fileRef} type="file" name="file" label="Image" />
             <button className="button button-green" type="submit">Submit</button>
           </form>
         </Modal>
