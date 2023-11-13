@@ -13,6 +13,7 @@ import LogoutPage from '../../pages/logout/LogoutPage';
 import OnlyPublic from './OnlyPublic';
 import Private from './Private';
 import ExhibitDetailsPage from '../../pages/exhibits/ExhibitDetailsPage';
+import AdditionalPage from '../../pages/additional/AdditionalPage';
 
 function AppRoutes() {
   return (
@@ -31,6 +32,7 @@ function AppRoutes() {
         <Route path="login" element={<OnlyPublic><LoginPage /></OnlyPublic>} />
         <Route path="sign-up" element={<OnlyPublic><SignUpPage /></OnlyPublic>} />
         <Route path="logout" element={<Private><LogoutPage /></Private>} />
+        <Route path="additional" element={<AdditionalPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>
     </Routes>

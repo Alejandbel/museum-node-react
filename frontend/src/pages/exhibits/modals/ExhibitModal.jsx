@@ -60,7 +60,7 @@ function ExhibitModal({
       file,
     }, (data) => {
       setModalOpen(false);
-      onSubmit({ ...data, _id: baseExhibit._id });
+      onSubmit({ ...data, _id: baseExhibit?._id });
     });
   };
 

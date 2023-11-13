@@ -25,6 +25,7 @@ function Navbar() {
         <li><Link to="/articles">Articles</Link></li>
         <li><Link to="/feedbacks">Feedbacks</Link></li>
         <li><Link to="/exhibits">Exhibits</Link></li>
+        <li><Link to="/additional">Additional</Link></li>
         <OnlyPublicOrEmpty>
           <li><Link to="/login">Login</Link></li>
           <li><Link to="/sign-up">Sign Up</Link></li>
